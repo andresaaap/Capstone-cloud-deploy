@@ -3,7 +3,7 @@ pipeline {
 	stages {
 		stage('Build') {
 			steps {
-				sh 'docker build -t cappru1 .'
+				sh 'sudo docker build -t cappru1 .'
 			}
 		}
 	}
