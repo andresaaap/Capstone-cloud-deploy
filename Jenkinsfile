@@ -32,7 +32,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-east-1', credentials:'aws-static') {
 					sh '''
-						kubectl config use-context arn:aws:iam::560967782130:role/kube
+						kubectl config use-context 
 					'''
 				}
 			}
