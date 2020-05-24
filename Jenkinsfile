@@ -11,7 +11,7 @@ pipeline {
 			steps {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
-						docker build -t andresaaap/cloudcapstone:$BUILD_ID .
+						docker build -t davincizhao/testcapstone:$BUILD_ID .
 					'''
 				}
 			}
@@ -22,7 +22,7 @@ pipeline {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
 						docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-						docker push andresaaap/cloudcapstone:$BUILD_ID
+						docker push davincizhao/testcapstone:$BUILD_ID
 					'''
 				}
 			}
@@ -42,7 +42,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-east-1', credentials:'aws-static') {
 					sh '''
-						kubectl run blueimage --image=andresaaap/cloudcapstone:$BUILD_ID --port=80
+						kubectl run blueimage --image=davincizhao/testcapstone:$BUILD_ID --port=80
 					'''
 				}
 			}
