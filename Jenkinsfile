@@ -30,9 +30,9 @@ pipeline {
 
 		stage('Set current kubectl context') {
 			steps {
-				withAWS(region:'us-east-1', credentials:'aws-static') {
+				withAWS(region:'us-east-2', credentials:'aws-static') {
 					sh '''
-						kubectl config use-context 
+						kubectl config use-context arn:aws:eks:us-east-2:560967782130:cluster/esktest
 					'''
 				}
 			}
@@ -40,7 +40,7 @@ pipeline {
 
 		stage('Create blue container') {
 			steps {
-				withAWS(region:'us-east-1', credentials:'aws-static') {
+				withAWS(region:'us-east-2', credentials:'aws-static') {
 					sh '''
 						kubectl run blueimage --image=davincizhao/testcapstone:$BUILD_ID --port=80
 					'''
@@ -50,7 +50,7 @@ pipeline {
 
 		stage('Expose container') {
 			steps {
-				withAWS(region:'us-east-1', credentials:'aws-static') {
+				withAWS(region:'us-east-2', credentials:'aws-static') {
 					sh '''
 						kubectl expose deployment blueimage --type=LoadBalancer --port=80
 					'''
@@ -60,7 +60,7 @@ pipeline {
 
 		stage('Domain redirect blue') {
 			steps {
-				withAWS(region:'us-east-1', credentials:'aws-static') {
+				withAWS(region:'us-east-2', credentials:'aws-static') {
 					sh '''
 						aws route53 change-resource-record-sets --hosted-zone-id ZKCU19G790VD6 --change-batch file://alias-record.json
 					'''
