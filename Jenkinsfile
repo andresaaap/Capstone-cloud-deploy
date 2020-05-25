@@ -30,7 +30,7 @@ pipeline {
 
 		stage('Set current kubectl context') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'aws-static') {
+				withAWS(region:'us-east-2', credentials:'jenkins') {
 					sh '''
 						kubectl config use-context arn:aws:eks:us-east-2:560967782130:cluster/esktest
 					'''
@@ -40,7 +40,7 @@ pipeline {
 
 		stage('Create blue container') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'aws-static') {
+				withAWS(region:'us-east-2', credentials:'jenkins') {
 					sh '''
 						kubectl run blueimage --image=davincizhao/testcapstone:$BUILD_ID --port=80
 					'''
