@@ -62,7 +62,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-east-2', credentials:'aws-static') {
 					sh '''
-						aws route53 change-resource-record-sets --hosted-zone-id ZKCU19G790VD6 --change-batch file://alias-record.json
+						aws route53 change-resource-record-sets --hosted-zone-id Z04130201VBQBX5OMRR0P --change-batch file://alias-record.json
 					'''
 				}
 			}
