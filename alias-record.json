@@ -6,7 +6,7 @@
                             "Name": "udacitypinzoncloudcapstone.de",
                             "Type": "A",
                             "AliasTarget":{
-                                    "HostedZoneId": "Z35SXDOTRQ7X7K",
+                                    "HostedZoneId": "Z04130201VBQBX5OMRR0P",
                                     "DNSName": "dualstack.",
                                     "EvaluateTargetHealth": false
                               }}
