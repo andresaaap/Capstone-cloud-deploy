@@ -32,7 +32,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-east-2', credentials:'jenkins') {
 					sh '''
-						aws --region us-east-2 eks update-kubeconfig --name esktest --role-arn arn:aws:iam::560967782130:role/eskrole
+						aws --region us-east-2 eks update-kubeconfig --name esktest --role-arn arn:aws:iam::560967782130:user/jenkins
 					
 					'''
 				}
@@ -42,7 +42,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-east-2', credentials:'jenkins') {
 					sh '''
-						kubectl get svc
+						kubectl get svc 
 					
 					'''
 				}
