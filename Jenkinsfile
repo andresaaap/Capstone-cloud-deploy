@@ -27,18 +27,7 @@ pipeline {
 				}
 			}
 		}
-		stage('create EKS cluster') {
-			steps {
-				withAWS(region:'us-east-2', credentials:'jenkins') {
-					sh '''
-						aws eks create-cluster --name project7 \
-						--role-arn arn:aws:iam::560967782130:role/aws-service-role/eks.amazonaws.com/AWSServiceRoleForAmazonEKS \
-						--resources-vpc-config subnetIds=subnet-0fc96d2cbfef62c9f,subnet-036426cab82d12cbd,subnet-067acf82983b0b457,securityGroupIds=sg-068da0085656483b4 
-					
-					'''
-				}
-			}
-		}		
+		
 
 		stage('Set kubeconfig') {
 			steps {
