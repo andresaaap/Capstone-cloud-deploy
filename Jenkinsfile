@@ -28,15 +28,26 @@ pipeline {
 			}
 		}
 
-		stage('Set current kubectl context') {
+		stage('Set kubeconfig') {
 			steps {
 				withAWS(region:'us-east-2', credentials:'jenkins') {
 					sh '''
-						kubectl config use-context arn:aws:eks:us-east-2:560967782130:cluster/esktest
+						aws eks --region us-east-2 update-kubeconfig --name esktest
+					
 					'''
 				}
 			}
 		}
+		stage('test config') {
+			steps {
+				withAWS(region:'us-east-2', credentials:'jenkins') {
+					sh '''
+						kubectl get svc
+					
+					'''
+				}
+			}
+		}		
 
 		stage('Create blue container') {
 			steps {
