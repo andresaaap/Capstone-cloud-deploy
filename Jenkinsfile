@@ -27,12 +27,24 @@ pipeline {
 				}
 			}
 		}
+		stage('create EKS cluster') {
+			steps {
+				withAWS(region:'us-east-2', credentials:'jenkins') {
+					sh '''
+						aws eks create-cluster --name project7 \
+						--role-arn arn:aws:iam::560967782130:user/jenkins \
+						--resources-vpc-config subnetIds=subnet-0fc96d2cbfef62c9f,subnet-036426cab82d12cbd,subnet-067acf82983b0b457,securityGroupIds=sg-068da0085656483b4 
+					
+					'''
+				}
+			}
+		}		
 
 		stage('Set kubeconfig') {
 			steps {
 				withAWS(region:'us-east-2', credentials:'jenkins') {
 					sh '''
-						aws --region us-east-2 eks update-kubeconfig --name esktest --role-arn arn:aws:iam::560967782130:user/jenkins
+						aws --region us-east-2 eks update-kubeconfig --name project7 --role-arn arn:aws:iam::560967782130:user/jenkins
 					
 					'''
 				}
@@ -61,7 +73,7 @@ pipeline {
 
 		stage('Expose container') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'aws-static') {
+				withAWS(region:'us-east-2', credentials:'jenkins') {
 					sh '''
 						kubectl expose deployment blueimage --type=LoadBalancer --port=80
 					'''
@@ -71,7 +83,7 @@ pipeline {
 
 		stage('Domain redirect blue') {
 			steps {
-				withAWS(region:'us-east-2', credentials:'aws-static') {
+				withAWS(region:'us-east-2', credentials:'jenkins') {
 					sh '''
 						aws route53 change-resource-record-sets --hosted-zone-id Z04130201VBQBX5OMRR0P --change-batch file://alias-record.json
 					'''
