@@ -47,6 +47,15 @@ pipeline {
 					'''
 				}
 			}
+		}
+		stage('add aws-auth') {
+			steps {
+				withAWS(region:'us-east-2', credentials:'jenkins') {
+					sh '''
+						kubectl apply -f aws-auth.yaml
+					'''
+				}
+			}
 		}		
 		stage('test config') {
 			steps {
