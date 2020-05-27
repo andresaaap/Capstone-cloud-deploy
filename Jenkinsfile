@@ -39,6 +39,15 @@ pipeline {
 				}
 			}
 		}
+		stage('assume role sts') {
+			steps {
+				withAWS(region:'us-east-2', credentials:'jenkins') {
+					sh '''
+						aws sts assume-role --role-arn arn:aws:iam::560967782130:role/eskrole --role-session-name test
+					'''
+				}
+			}
+		}		
 		stage('test config') {
 			steps {
 				withAWS(region:'us-east-2', credentials:'jenkins') {
