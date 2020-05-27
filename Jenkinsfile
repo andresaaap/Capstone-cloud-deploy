@@ -33,7 +33,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-east-2', credentials:'jenkins') {
 					sh '''
-						aws --region us-east-2 eks update-kubeconfig --name jenEKS --role-arn arn:aws:iam::560967782130:role/eskrole
+						aws --region us-east-2 eks update-kubeconfig --name jenEKS 
 					
 					'''
 				}
