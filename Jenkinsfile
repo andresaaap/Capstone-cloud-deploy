@@ -23,6 +23,7 @@ pipeline {
 					sh '''
 						docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 						docker push davincizhao/testcapstone:$BUILD_ID
+						echo $BUILD_ID
 					'''
 				}
 			}
@@ -33,7 +34,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-east-2', credentials:'jenkins') {
 					sh '''
-						aws --region us-east-2 eks update-kubeconfig --name jenEKS 
+						aws --region us-east-2 eks update-kubeconfig --name testeksctl 
 					
 					'''
 				}
