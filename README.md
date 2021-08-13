@@ -7,3 +7,7 @@
 sudo amazon-linux-extras install epel
 ```
 - Install git,tidy,docker
+enable docker daemon
+'''
+systemctl start docker
+'''
