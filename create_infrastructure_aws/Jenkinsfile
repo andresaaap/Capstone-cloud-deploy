@@ -4,11 +4,11 @@ pipeline {
 
 		stage('Infrastructure: Create k8s cluster in AWS') {
 			steps {
-				withAWS(region:'us-west-1', credentials:'aws_credentials') {
+				withAWS(region:'us-west-1', credentials:'aws_credential') {
 					sh '''
 						eksctl create cluster \
 						--name capstonecluster \
-						--version 1.13 \
+						--version 1.21 \
 						--nodegroup-name standard-workers \
 						--node-type t2.small \
 						--nodes 2 \
@@ -28,7 +28,7 @@ pipeline {
 
 		stage('Configurature: Create config file of cluster') {
 			steps {
-				withAWS(region:'us-west-1', credentials:'aws_credentials') {
+				withAWS(region:'us-west-1', credentials:'aws_credential') {
 					sh '''
 						aws eks --region us-west-1 update-kubeconfig --name capstonecluster
 					'''
