@@ -7,18 +7,18 @@ pipeline {
 				withAWS(region:'us-west-1', credentials:'aws_credential') {
 					sh '''
 						eksctl create cluster \
-						--name capstonecluster \
+						--name NginxCluster \
 						--version 1.21 \
-						--nodegroup-name standard-workers \
-						--node-type t2.small \
+						--nodegroup-name myNgroup \
+						--node-type t2.micro \
 						--nodes 2 \
 						--nodes-min 1 \
 						--nodes-max 3 \
-			
-						--region us-west-1 \
-						--zones us-west-1a \
-						--zones us-west-1b \
-						--zones us-west-1c \
+                                                --ssh-access \
+                                                --managed false \
+                                                --region us-west-1 \
+                                                --ssh-public-key udacity_CD
+				
 					'''
 				}
 			}
