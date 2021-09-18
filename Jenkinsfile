@@ -8,18 +8,16 @@ pipeline {
 		stage('Infrastructure: Create k8s cluster in AWS') {
 			steps {
 				withAWS(region:'us-west-1', credentials:'aws_credential') {
-					sh '''
+	                               sh '''
                                                 eksctl create cluster \
-                                                --name prod \
-                                                --version 1.17
-                                                --nodegroup-name  linux-nodes \
+                                                --name cap99 \
+                                                --version 1.21 \
+                                                --region us-west-2 \
+                                                --nodegroup-name nginx-nodes \
                                                 --node-type t2.small \
                                                 --nodes 2 \
                                                 --nodes-min 1 \
-                                                --nodes-max 3 \
-                                                --region us-west-2 \
-                                                --ssh-access \
-                                                --ssh-public-key udacity_CD \
+                                                --nodes-max 3  \
                                                 --managed
 					'''
 				}
@@ -31,7 +29,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-west-1', credentials:'aws_credential') {
 					sh '''
-						aws eks --region us-west-2 update-kubeconfig --name prod
+						aws eks --region us-west-2 update-kubeconfig --name cap99
 					'''
 				}
 			}
