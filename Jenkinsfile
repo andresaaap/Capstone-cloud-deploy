@@ -1,6 +1,8 @@
 pipeline {
 	agent any
-
+        triggers {
+            githubPush()
+        }
 	stages {
 
 		stage('Infrastructure: Create k8s cluster in AWS') {
