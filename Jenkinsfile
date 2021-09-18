@@ -10,18 +10,17 @@ pipeline {
 				withAWS(region:'us-west-1', credentials:'aws_credential') {
 					sh '''
                                                 eksctl create cluster \
-                                                --name cap44 \
+                                                --name cap66 \
                                                 --nodegroup-name  myNgroup \
-                                                --node-type t2.micro \
+                                                --node-type t2.small \
                                                 --nodes 2 \
                                                 --nodes-min 1 \
-                                                --nodes-max 3 \                                                
+                                                --nodes-max 3 \  
                                                 --region us-west-1 \
                                                 --with-oidc \
                                                 --ssh-access \
                                                 --ssh-public-key udacity_CD \
-                                                --managed             
-				
+                                                --managed
 					'''
 				}
 			}
@@ -32,7 +31,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-west-1', credentials:'aws_credential') {
 					sh '''
-						aws eks --region us-west-1 update-kubeconfig --name cap44
+						aws eks --region us-west-1 update-kubeconfig --name cap66
 					'''
 				}
 			}
