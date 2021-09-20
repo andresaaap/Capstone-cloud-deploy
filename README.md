@@ -1,37 +1,16 @@
-# Capstone-cloud-deploy
+# Create EKS in AWS
 
 
-## Step 1: Propose and Scope the Project
-- CI/CD tool platform: Jenkins,ansible,cloudformation,AWS
-- Deployment strategy: Blue/green deployment.
-- Container: Docker.
-- Application: Ngix
-- Repo: Github
-## Step 2: Use Jenkins implement blue/green deployment.
-- create Jenkins master box and install the plugins.
--[Install Jenkins and login Jenkins](https://github.com/davincizhao/Jenkins_Pipelines_on_AWS/blob/master/README.md)
-- Install epel
+## Step 1: start EC2 instance in AWS
+## Step 2: using keypairs to login EC2
+## Step 3: run prepare_jeniks_tools.sh to install Jenkins and other tools.
+## Step 4: get Jenkins token from EC2 server
 ```
-sudo amazon-linux-extras install epel
+cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
-- Install git,tidy,docker
-Enable docker daemon and allow jenkins to connect to docker engine.
-'''
-systemctl start docker
-chown jenkins /var/run/docker.sock
-'''
-
-## Step 3: Pick AWS Kubernetes as a Service.
-- Use Ansible or CloudFormation to build the Kubernetes Cluster.
-
-
-## Step 4: Build your pipeline
-- Construct pipeline with GitHub repository.
-- Set up all the steps that your pipeline will include.
-- Configure a deployment pipeline.
-- nclude your Dockerfile/source code in the Git repository.
-- Include with Linting.
-## Step 5: Test your pipeline
-- Perform builds on your pipeline.
+## Step 5: Login Jenkins
+## Step 6: install plugin in Jenkins and save Github,aws and dockerhub credential into Jenkins
+## Step 7: create new pipeline with Github repo
+## Step 8: select branch "create_cluster"
 
 
