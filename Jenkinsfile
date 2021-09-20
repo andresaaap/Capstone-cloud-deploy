@@ -10,11 +10,11 @@ pipeline {
 				withAWS(region:'us-west-1', credentials:'aws_credential') {
 	                               sh '''
                                                 eksctl create cluster \
-                                                --name cap99 \
+                                                --name cap8899 \
                                                 --version 1.21 \
                                                 --region us-west-2 \
                                                 --nodegroup-name nginx-nodes \
-                                                --node-type t2.small \
+                                                --node-type t2.micro \
                                                 --nodes 2 \
                                                 --nodes-min 1 \
                                                 --nodes-max 3  \
@@ -29,7 +29,7 @@ pipeline {
 			steps {
 				withAWS(region:'us-west-1', credentials:'aws_credential') {
 					sh '''
-						aws eks --region us-west-2 update-kubeconfig --name cap99
+						aws eks --region us-west-2 update-kubeconfig --name cap8899
 					'''
 				}
 			}
